@@ -9,7 +9,7 @@ function setupSocketHandlers(io) {
 
   // Initialize and start bot service
   botService = new BotService(elevatorController);
-  botService.start(5000); // Make request every 5 seconds
+  botService.start();
 
   io.on('connection', (socket) => {
     console.log('a user connected');

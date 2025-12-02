@@ -6,22 +6,20 @@ class BotService {
   constructor(elevatorController) {
     this.elevatorController = elevatorController;
     this.isRunning = false;
-    this.interval = null;
+    this.timeout = null;
     this.botNames = [
       'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 
-      'Grace', 'Henry', 'Iris', 'Jack', 'Kate', 'Leo'
+      'Grace', 'Henry', 'Iris', 'Jack', 'Kate', 'Leo',
+      'Maya', 'Noah', 'Olivia', 'Peter', 'Quinn', 'Rachel'
     ];
   }
 
-  start(intervalMs = 5000) {
+  start() {
     if (this.isRunning) return;
     
-    console.log('🤖 Bot service started - making requests every', intervalMs, 'ms');
+    console.log('🤖 Bot service started - making requests every 4-8 seconds');
     this.isRunning = true;
-
-    this.interval = setInterval(() => {
-      this.makeRandomRequest();
-    }, intervalMs);
+    this.scheduleNextRequest();
   }
 
   stop() {
@@ -30,10 +28,22 @@ class BotService {
     console.log('🤖 Bot service stopped');
     this.isRunning = false;
     
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
     }
+  }
+
+  scheduleNextRequest() {
+    if (!this.isRunning) return;
+
+    // Random interval between 4000ms (4s) and 8000ms (8s)
+    const randomInterval = Math.floor(Math.random() * 4000) + 4000;
+    
+    this.timeout = setTimeout(() => {
+      this.makeRandomRequest();
+      this.scheduleNextRequest(); // Schedule the next one
+    }, randomInterval);
   }
 
   makeRandomRequest() {

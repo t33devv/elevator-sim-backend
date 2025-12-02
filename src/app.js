@@ -1,9 +1,16 @@
 const ElevatorController = require('./controllers/elevatorController')
+const BotService = require('./services/BotService')
 
 let elevatorController = null;
+let botService = null;
 
 function setupSocketHandlers(io) {
   elevatorController = new ElevatorController(io);
+
+  // Initialize and start bot service
+  botService = new BotService(elevatorController);
+  botService.start(5000); // Make request every 5 seconds
+
   io.on('connection', (socket) => {
     console.log('a user connected');
 

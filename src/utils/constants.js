@@ -1,0 +1,7 @@
+module.exports = {
+    TOTAL_FLOORS: 10,
+    NUM_ELEVATORS: 2,
+    FLOOR_TRAVEL_TIME: 1000,
+    DOOR_OPEN_TIME: 2000,
+    UPDATE_SPEED: 100,
+}

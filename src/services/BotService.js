@@ -38,7 +38,7 @@ class BotService {
     if (!this.isRunning) return;
 
     // Random interval between 4000ms (4s) and 8000ms (8s)
-    const randomInterval = Math.floor(Math.random() * 4000) + 4000;
+    const randomInterval = Math.floor(Math.random() * 6000) + 4000;
     
     this.timeout = setTimeout(() => {
       this.makeRandomRequest();

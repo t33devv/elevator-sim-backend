@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 setupSocketHandlers(io);
 
 server.listen(3000, () => {
